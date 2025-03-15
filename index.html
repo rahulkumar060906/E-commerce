@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Commerce</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header>
+        <h1>Welcome to the E-Commerce Website</h1>
+    </header>
+    <main>
+        <section>
+            <p>
+                This is a simple e-commerce website where you can browse products and make purchases.
+            </p>
+        </section>
+        <section id="products">
+        </section>
+        <section id="cart">
+            <h2>Your Cart</h2>
+            <ul id="cart-items">
+                <li>No items in cart.</li>
+            </ul>
+            <button class="hidden" id="clear-cart">Clear Cart</button>
+            <div class="right-align">
+                <p id="cart-total" class="hidden">Total: <span id="total">$0.00</span></p>
+                <button class="hidden" id="checkout">Checkout</button>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2023 E-Commerce Website. All rights reserved.</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+
+</html>
