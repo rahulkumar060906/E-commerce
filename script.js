@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function () {
         { id: 5, name: "Product 5", img: 'product5.jpg', price: 99.90 },
         { id: 6, name: "Product 6", img: 'product6.jpg', price: 39.90 },
     ];
-    let cart = [];
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
     const productContainer = document.getElementById('products') 
     const cartContainer = document.getElementById('cart')
@@ -16,6 +16,10 @@ document.addEventListener('DOMContentLoaded', function () {
     const total = document.getElementById('total')
     const checkoutBtn = document.getElementById("checkout")
     const clearCartBtn = document.getElementById("clear-cart")
+
+    const saveCartToLocalStorage = () => {
+        localStorage.setItem('cart', JSON.stringify(cart)); // Save the updated cart to localStorage
+    };
 
     const addToCart = (product) => {
         
@@ -28,9 +32,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 // Add product with quantity if not in the cart
                 cart.push({ ...product, quantity: 1 });
             }
-            // cart.push(product)
+            saveCartToLocalStorage();
             updateCart();
-            console.log(cart);
+
         }
         }
     
@@ -84,6 +88,7 @@ document.addEventListener('DOMContentLoaded', function () {
             removeItem.addEventListener("click", function (e) { 
                 const productId = parseInt(e.target.id, 10); // Get product ID from the button's ID
                 cart = cart.filter(item => item.id !== productId); // Remove the product from the cart array
+                saveCartToLocalStorage();
                 updateCart(); // Update the cart display after removal
             });
     
@@ -102,6 +107,7 @@ document.addEventListener('DOMContentLoaded', function () {
     
     clearCartBtn.addEventListener('click', function () { 
         cart = [];
+        saveCartToLocalStorage();
         updateCart();
         cartItems.innerText = 'No items in cart.';
         cartTotal.classList.add('hidden')
@@ -124,6 +130,7 @@ document.addEventListener('DOMContentLoaded', function () {
     
         // Clear the cart and update the UI
         cart = [];
+        saveCartToLocalStorage();
         updateCart();
         cartItems.innerText = 'No items in cart.';
         cartTotal.classList.add('hidden');
@@ -132,5 +139,5 @@ document.addEventListener('DOMContentLoaded', function () {
         console.log(cart);
     });
     
-  
+    updateCart(); 
 })
