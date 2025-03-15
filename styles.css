@@ -66,18 +66,36 @@ main {
 
 /* Button Styles */
 button.add-to-cart {
-    background-color: #76c7c0; /* Accent button color */
-    color: #121212; /* Contrast with the dark theme */
-    border: none;
-    padding: 0.5rem 1rem;
-    border-radius: 5px;
+    width: 150px;
+    padding: 5px;
+    font-size: 15px;
+    font-weight: 700;
     cursor: pointer;
-    font-size: 1rem;
-    transition: background-color 0.3s ease;
+    background: #fff;
+    color: black;
+    border: 2px solid black;
+    transition: background 400ms ease-out,
+                color 400ms ease-out,
+                border 400ms ease-out; 
 }
-
+ul{
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+}
+li{
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+    border: 1px solid #383b3a;
+    width: 50%;
+    text-align: center;
+    padding: 5px 0;
+}
 button.add-to-cart:hover {
-    background-color: #60a8a1; /* Darker hover color */
+    background: #E00462;
+    color: #fff;
+    border: none; /* Darker hover color */
 }
 
 /* Footer (Script Placement) */
@@ -176,7 +194,25 @@ footer {
     border: 2px solid #494949;
     border-radius: 50px;
 }
+.remove-item{
+    width: 100px;
+    padding: 5px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    background: #383b3a;
+    color: #1bbb85;
+    border: 2px solid #1bbb85;
+    border-radius: 5px; 
+    transition: background 400ms ease-out,
+    color 400ms ease-out; 
+}
 
+.remove-item:hover {
+    background: #1bbb85;
+    color: #383b3a;
+    border-radius: 5px; 
+}
 .hidden {
     display: none;
 }

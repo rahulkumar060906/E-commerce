@@ -57,17 +57,47 @@ document.addEventListener('DOMContentLoaded', function () {
     const updateCart = () => {
         cartItems.innerHTML = ''; // Clear the container
         let totalAmount = 0;
+
+    if (cart.length === 0) {
+        // Display message when the cart is empty
+        const emptyMessage = document.createElement('p');
+        emptyMessage.textContent = 'No items in cart.';
+        cartItems.appendChild(emptyMessage);
+
+        // Hide cart details and buttons when empty
+        cartTotal.classList.add('hidden');
+        checkoutBtn.classList.add('hidden');
+        clearCartBtn.classList.add('hidden');
+        return; // Exit the function early as there's nothing else to process
+    }
         cart.forEach(product => {
+            const cartlist = document.createElement('li');
             const cartItem = document.createElement('div');
             cartItem.textContent = `${product.name} - $ ${product.price} X ${product.quantity}`;
-            cartItems.appendChild(cartItem);
+            
+            const removeItem = document.createElement("button");
+            removeItem.textContent = "Remove";
+            removeItem.setAttribute('id', product.id);
+            removeItem.setAttribute('class', "remove-item");
+    
+            // Add an event listener for the remove button
+            removeItem.addEventListener("click", function (e) { 
+                const productId = parseInt(e.target.id, 10); // Get product ID from the button's ID
+                cart = cart.filter(item => item.id !== productId); // Remove the product from the cart array
+                updateCart(); // Update the cart display after removal
+            });
+    
+            cartlist.appendChild(cartItem);
+            cartlist.appendChild(removeItem);
+            cartItems.appendChild(cartlist);
+    
             totalAmount += product.price * product.quantity;
         });
         
         total.textContent = ` $${totalAmount.toFixed(2)}`;
-        cartTotal.classList.remove('hidden')
-        checkoutBtn.classList.remove('hidden')
-        clearCartBtn.classList.remove('hidden')
+        cartTotal.classList.toggle('hidden', cart.length === 0); // Hide/show cart total dynamically
+        checkoutBtn.classList.toggle('hidden', cart.length === 0);
+        clearCartBtn.classList.toggle('hidden', cart.length === 0);
     };
     
     clearCartBtn.addEventListener('click', function () { 
